@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       TITRE DE L'ONGLET - Modifie ce texte
+       ============================================================ -->
+  <title>Portfolio – Prénom NOM | BTS SIO SLAM</title>
+
+  <!-- ============================================================
+       POLICE GOOGLE FONTS - Tu peux en changer sur fonts.google.com
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================
+       VARIABLES GLOBALES - Palette de couleurs & typo
+       Change ces valeurs pour recolorer tout le site d'un coup
+       ========================================================== */
+    :root {
+      --bg:          #0d0f14;         /* Fond principal (sombre) */
+      --bg2:         #13161e;         /* Fond des cartes */
+      --bg3:         #1a1e28;         /* Fond des cartes secondaires */
+      --accent:      #5ce1e6;         /* Couleur accent principale (cyan) */
+      --accent2:     #7c6ff7;         /* Couleur accent secondaire (violet) */
+      --text:        #e8eaf0;         /* Texte principal */
+      --muted:       #7a8099;         /* Texte secondaire / grisé */
+      --border:      rgba(255,255,255,0.07); /* Bordure subtile */
+      --font-title:  'Syne', sans-serif;
+      --font-body:   'DM Sans', sans-serif;
+    }
+
+    /* ==========================================================
+       RESET & BASE
+       ========================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--accent); text-decoration: none; transition: opacity .2s; }
+    a:hover { opacity: .75; }
+    img { max-width: 100%; border-radius: 8px; display: block; }
+
+    /* ==========================================================
+       BARRE DE NAVIGATION
+       ========================================================== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(13, 15, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* -- Logo / initiales dans la nav -- */
+    .nav-logo {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--accent);
+      letter-spacing: .05em;
+    }
+
+    /* -- Liens de navigation -- */
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); opacity: 1; }
+
+    /* ==========================================================
+       WRAPPER GÉNÉRAL - Largeur max du contenu
+       ========================================================== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ==========================================================
+       SECTIONS - Espacement commun
+       ========================================================== */
+    section {
+      padding: 7rem 0 4rem;
+    }
+    section:first-of-type { padding-top: 8rem; }
+
+    /* -- Titre de section (badge + titre) -- */
+    .section-label {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      padding: .25rem .9rem;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 2.5rem;
+    }
+    .section-title span { color: var(--accent); }
+
+    /* Séparateur horizontal */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 5rem 0 0;
+    }
+
+    /* ==========================================================
+       1. SECTION HERO – Présentation personnelle
+       ========================================================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Cercle décoratif en fond */
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(92,225,230,.12) 0%, transparent 70%);
+      top: -100px; right: -150px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* -- Texte accroche -- */
+    .hero-eyebrow {
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .75rem;
+    }
+
+    /* ---- MODIFIE TON NOM ICI ---- */
+    .hero-name {
+      font-family: var(--font-title);
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .hero-name .accent { color: var(--accent); }
+
+    /* ---- MODIFIE TA CLASSE ICI ---- */
+    .hero-class {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    /* ---- MODIFIE TA PRÉSENTATION ICI ---- */
+    .hero-bio {
+      max-width: 560px;
+      margin-bottom: 2rem;
+      color: var(--text);
+      font-size: 1.05rem;
+    }
+
+    /* Boutons CTA */
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.75rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: .95rem;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px); opacity: 1; }
+    .btn-primary {
+      background: var(--accent);
+      color: #0d0f14;
+      font-weight: 700;
+      box-shadow: 0 0 20px rgba(92,225,230,.3);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Photo de profil */
+    .hero-photo {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 40px rgba(92,225,230,.2);
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================
+       CARDS GÉNÉRIQUES (réutilisées dans plusieurs sections)
+       ========================================================== */
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color .3s, transform .3s;
+    }
+    .card:hover {
+      border-color: rgba(92,225,230,.3);
+      transform: translateY(-4px);
+    }
+    .card-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+    .card-title {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+    .card-meta {
+      font-size: .82rem;
+      color: var(--accent2);
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+    .card p { color: var(--muted); font-size: .95rem; }
+
+    /* ==========================================================
+       2. SECTION PARCOURS – Scolaire & professionnel
+       ========================================================== */
+    /* Timeline verticale */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.4rem; top: .4rem;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+
+    /* ---- DATE de l'expérience ---- */
+    .timeline-date {
+      font-size: .8rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: .25rem;
+    }
+    .timeline-title {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .timeline-sub {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: .5rem;
+    }
+    .timeline-desc { color: var(--muted); font-size: .95rem; }
+
+    /* ==========================================================
+       3. SECTION BTS SIO
+       ========================================================== */
+    .bts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 700px) { .bts-grid { grid-template-columns: 1fr; } }
+
+    .option-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color: #0d0f14;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: .4rem 1.2rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    /* ==========================================================
+       4. SECTION PROJETS PPE
+       ========================================================== */
+    /* Badges de technologie */
+    .tech-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+    .tech-tag {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: .25rem .85rem;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .04em;
+    }
+
+    /* Miniature du projet */
+    .project-screenshot {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+      background: var(--bg3);  /* Couleur si l'image est absente */
+    }
+
+    /* Lien GitHub */
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: .4rem .9rem;
+      border-radius: 6px;
+      transition: color .2s, border-color .2s;
+      margin-top: .75rem;
+    }
+    .project-link:hover { color: var(--accent); border-color: var(--accent); opacity: 1; }
+
+    /* ==========================================================
+       5. SECTION VEILLE TECHNOLOGIQUE
+       ========================================================== */
+    .veille-tools { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.25rem 0; }
+    .veille-tool {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: .4rem 1rem;
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ==========================================================
+       6. SECTION GESTION DU PATRIMOINE INFORMATIQUE
+       ========================================================== */
+    /* Même style card-grid */
+
+    /* ==========================================================
+       7. TABLEAU DE COMPÉTENCES
+       ========================================================== */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .skills-table thead tr {
+      background: var(--bg3);
+    }
+    .skills-table th {
+      padding: .9rem 1.2rem;
+      text-align: left;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .skills-table td {
+      padding: .85rem 1.2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+    }
+    .skills-table tr:hover td { background: var(--bg3); }
+
+    /* Niveaux de compétence */
+    .skill-level {
+      display: flex;
+      gap: 4px;
+    }
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+    }
+    .dot.filled { background: var(--accent); border-color: var(--accent); }
+    .dot.half   { background: var(--accent2); border-color: var(--accent2); }
+
+    /* Coche de maîtrise */
+    .check { color: #4ade80; font-size: 1.1rem; }
+    .cross { color: #f87171; }
+
+    /* ==========================================================
+       8. SECTION CONTACT
+       ========================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    .contact-info p { color: var(--muted); margin-bottom: 1.5rem; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      color: var(--text);
+      padding: .9rem 1.2rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: .75rem;
+      font-weight: 500;
+      transition: border-color .2s, transform .2s;
+    }
+    .contact-link:hover { border-color: var(--accent); transform: translateX(4px); opacity: 1; }
+    .contact-icon { font-size: 1.2rem; }
+
+    /* Formulaire de contact */
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: .4rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: .95rem;
+      resize: vertical;
+      transition: border-color .2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { min-height: 120px; }
+
+    /* ==========================================================
+       FOOTER
+       ========================================================== */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--muted);
+      font-size: .85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ==========================================================
+       RESPONSIVE – Mobile
+       ========================================================== */
+    @media (max-width: 700px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo { width: 130px; height: 130px; }
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }   /* Simplifié : masquer sur mobile */
+      section { padding: 5rem 0 3rem; }
+    }
+
+    /* ==========================================================
+       ANIMATIONS D'ENTRÉE (léger fade-up)
+       ========================================================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .6s ease both; }
+    .delay-1 { animation-delay: .1s; }
+    .delay-2 { animation-delay: .2s; }
+    .delay-3 { animation-delay: .3s; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       Modifie les initiales (.nav-logo) et les ancres (#section)
+       ============================================================ -->
+  <nav>
+    <div class="nav-logo">P.N</div>  <!-- ← Tes initiales -->
+    <ul class="nav-links">
+      <li><a href="#hero">Accueil</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#bts">BTS SIO</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#veille">Veille</a></li>
+      <li><a href="#patrimoine">Patrimoine</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       1. HERO — PRÉSENTATION PERSONNELLE
+       Modifie : nom, prénom, classe, bio, photo, liens CV/LinkedIn
+       ============================================================ -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+
+        <div>
+          <p class="hero-eyebrow fade-up">Portfolio étudiant · BTS SIO</p>
+
+          <!-- ====== TON PRÉNOM ET NOM ====== -->
+          <h1 class="hero-name fade-up delay-1">
+            Prénom <span class="accent">NOM</span>
+          </h1>
+
+          <!-- ====== TA CLASSE ====== -->
+          <p class="hero-class fade-up delay-2">BTS SIO – Option SLAM · Lycée XXX · 2024-2026</p>
+
+          <!-- ====== TA BIO / PRÉSENTATION ====== -->
+          <p class="hero-bio fade-up delay-2">
+            Étudiant(e) en 2ᵉ année de BTS SIO option SLAM, passionné(e) par le développement
+            web et les nouvelles technologies. À la recherche d'une alternance / stage pour
+            mettre en pratique mes compétences.
+          </p>
+
+          <!-- ====== BOUTONS : CV + LinkedIn ====== -->
+          <div class="btn-group fade-up delay-3">
+            <!-- Remplace le href par le chemin de ton CV PDF -->
+            <a href="cv.pdf" download class="btn btn-primary">📄 Télécharger mon CV</a>
+            <!-- Remplace par ton URL LinkedIn réelle -->
+            <a href="https://linkedin.com/in/ton-profil" target="_blank" class="btn btn-secondary">🔗 LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- ====== TA PHOTO ====== -->
+        <!-- Remplace "photo.jpg" par le nom de ton fichier image -->
+        <img
+          src="photo.jpg"
+          alt="Photo de profil"
+          class="hero-photo fade-up delay-2"
+          onerror="this.style.background='var(--bg3)'"
+        />
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider container" />
+
+
+  <!-- ============================================================
+       2. PARCOURS SCOLAIRE & PROFESSIONNEL
+       Ajoute / supprime des .timeline-item selon ton parcours
+       ============================================================ -->
+  <section id="parcours">
+    <div class="container">
+      <span class="section-label">Parcours</span>
+      <h2 class="section-title">Scolaire &amp; <span>Professionnel</span></h2>
+
+      <div class="timeline">
+
+        <!-- == EXPÉRIENCE 1 — Modifie la date, le titre, l'entreprise et la description == -->
+        <div class="timeline-item">
+          <p class="timeline-date">2025 – Aujourd'hui</p>
+          <h3 class="timeline-title">Alternance – Développeur web</h3>
+          <p class="timeline-sub">Entreprise XYZ · Montpellier</p>
+          <p class="timeline-desc">
+            Développement et maintenance d'applications web internes. Technologies : PHP, MySQL, JavaScript.
+          </p>
+        </div>
+
+        <!-- == EXPÉRIENCE 2 == -->
+        <div class="timeline-item">
+          <p class="timeline-date">Mai – Juin 2024</p>
+          <h3 class="timeline-title">Stage – Technicien informatique</h3>
+          <p class="timeline-sub">Entreprise ABC · Nîmes</p>
+          <p class="timeline-desc">
+            Assistance utilisateurs, maintenance du parc informatique, installation de postes de travail.
+          </p>
+        </div>
+
+        <!-- == FORMATION 1 == -->
+        <div class="timeline-item">
+          <p class="timeline-date">2024 – 2026</p>
+          <h3 class="timeline-title">BTS SIO – Option SLAM</h3>
+          <p class="timeline-sub">Lycée XXX · Montpellier</p>
+          <p class="timeline-desc">
+            Formation en solutions logicielles et applications métier.
+          </p>
+        </div>
+
+        <!-- == FORMATION 2 == -->
+        <div class="timeline-item">
+          <p class="timeline-date">2024</p>
+          <h3 class="timeline-title">Baccalauréat Général – Spé NSI & Maths</h3>
+          <p class="timeline-sub">Lycée YYY · Montpellier</p>
+          <p class="timeline-desc">Mention Bien.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider container" />
+
+
+  <!-- ============================================================
+       3. PRÉSENTATION DU BTS SIO ET DE TON OPTION
+       Modifie l'option choisie (SLAM ou SISR) et les descriptions
+       ============================================================ -->
+  <section id="bts">
+    <div class="container">
+      <span class="section-label">Formation</span>
+      <h2 class="section-title">BTS <span>SIO</span></h2>
+
+      <div class="bts-grid">
+
+        <!-- Description du BTS -->
+        <div class="card">
+          <h3 class="card-title">Qu'est-ce que le BTS SIO ?</h3>
+          <p>
+            Le Brevet de Technicien Supérieur <strong>Services Informatiques aux Organisations</strong>
+            est un diplôme bac+2 qui forme des techniciens capables de gérer, développer et sécuriser
+            les systèmes informatiques d'une organisation.
+          </p>
+          <br />
+          <p>
+            Il est décliné en deux options complémentaires pour répondre à des besoins différents
+            des entreprises.
+          </p>
+        </div>
+
+        <!-- Ton option -->
+        <div class="card">
+          <!-- ====== CHANGE "SLAM" EN "SISR" SI BESOIN ====== -->
+          <span class="option-badge">Option SLAM</span>
+          <h3 class="card-title">Solutions Logicielles et Applications Métiers</h3>
+          <p>
+            L'option SLAM forme au développement d'applications web et mobiles, à la conception
+            de bases de données et à l'intégration de solutions logicielles. Les compétences clés
+            incluent la programmation (Python, PHP, Java), la gestion de BDD (SQL) et la création
+            d'interfaces utilisateur (HTML/CSS/JavaScript).
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider container" />
+
+
+  <!-- ============================================================
+       4. PROJETS PPE (Projets Personnalisés Encadrés)
+       Ajoute/supprime des .card dans .card-grid pour tes projets
+       ============================================================ -->
+  <section id="projets">
+    <div class="container">
+      <span class="section-label">Réalisations</span>
+      <h2 class="section-title">Projets <span>PPE</span></h2>
+
+      <div class="card-grid card-grid-2">
+
+        <!-- == PROJET 1 — Modifie le titre, les techs, la description, la capture et le lien == -->
+        <div class="card">
+          <!-- Remplace "screenshot1.jpg" par ta vraie capture d'écran -->
+          <img src="screenshot1.jpg" alt="Capture projet 1" class="project-screenshot"
+               onerror="this.style.background='var(--bg3)'; this.alt='Aperçu indisponible'" />
+
+          <p class="card-meta">PPE 1 · 2024</p>
+          <h3 class="card-title">Nom du projet 1</h3>
+          <p>
+            Description du projet : objectifs, contexte, ce que tu as réalisé et appris.
+            Explique le problème résolu et ta méthode.
+          </p>
+
+          <!-- Technologies utilisées -->
+          <div class="tech-tags">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">PHP</span>
+            <span class="tech-tag">MySQL</span>
+          </div>
+
+          <!-- Lien GitHub — remplace href -->
+          <a href="https://github.com/ton-user/repo1" target="_blank" class="project-link">
+            ⬡ Voir sur GitHub
+          </a>
+        </div>
+
+        <!-- == PROJET 2 == -->
+        <div class="card">
+          <img src="screenshot2.jpg" alt="Capture projet 2" class="project-screenshot"
+               onerror="this.style.background='var(--bg3)'; this.alt='Aperçu indisponible'" />
+
+          <p class="card-meta">PPE 2 · 2025</p>
+          <h3 class="card-title">Nom du projet 2</h3>
+          <p>
+            Description du projet 2. Mentionne les difficultés rencontrées et comment
+            tu les as résolues.
+          </p>
+
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Flask</span>
+            <span class="tech-tag">SQL</span>
+            <span class="tech-tag">JavaScript</span>
+          </div>
+
+          <a href="https://github.com/ton-user/repo2" target="_blank" class="project-link">
+            ⬡ Voir sur GitHub
+          </a>
+        </div>
+
+        <!-- == PROJET 3 (optionnel, duplique ce bloc si besoin) == -->
+        <div class="card">
+          <img src="screenshot3.jpg" alt="Capture projet 3" class="project-screenshot"
+               onerror="this.style.background='var(--bg3)'; this.alt='Aperçu indisponible'" />
+
+          <p class="card-meta">PPE 3 · 2025</p>
+          <h3 class="card-title">Nom du projet 3</h3>
+          <p>
+            Description du projet 3. N'hésite pas à préciser les livrables produits
+            (maquettes, documentation, code source…).
+          </p>
+
+          <div class="tech-tags">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">MongoDB</span>
+          </div>
+
+          <a href="https://github.com/ton-user/repo3" target="_blank" class="project-link">
+            ⬡ Voir sur GitHub
+          </a>
+        </div>
+
+      </div><!-- fin card-grid -->
+    </div>
+  </section>
+
+  <hr class="divider container" />
+
+
+  <!-- ============================================================
+       5. VEILLE TECHNOLOGIQUE
+       Modifie le sujet, les outils et l'impact
+       ============================================================ -->
+  <section id="veille">
+    <div class="container">
+      <span class="section-label">Veille</span>
+      <h2 class="section-title">Veille <span>Technologique</span></h2>
+
+      <div class="card-grid card-grid-2">
+
+        <!-- Sujet & outils -->
+        <div class="card">
+          <p class="card-meta">Sujet de veille</p>
+          <!-- ====== MODIFIE TON SUJET DE VEILLE ====== -->
+          <h3 class="card-title">Intelligence Artificielle &amp; Développement logiciel</h3>
+          <p>
+            Ma veille porte sur l'évolution de l'IA générative et son impact sur les pratiques
+            de développement (GitHub Copilot, ChatGPT, outils d'automatisation de tests…).
+          </p>
+
+          <!-- ====== TES OUTILS DE VEILLE ====== -->
+          <div class="veille-tools">
+            <span class="veille-tool">📬 Google Alerts</span>
+            <span class="veille-tool">📰 Feedly</span>
+            <span class="veille-tool">🐦 Twitter / X</span>
+            <span class="veille-tool">📡 Reddit r/programming</span>
+            <span class="veille-tool">💼 LinkedIn</span>
+          </div>
+        </div>
+
+        <!-- Impact -->
+        <div class="card">
+          <p class="card-meta">Impact sur mon domaine</p>
+          <h3 class="card-title">Ce que ça change pour moi</h3>
+          <p>
+            L'essor des outils d'IA accélère le développement mais exige une maîtrise
+            accrue des fondamentaux pour vérifier et corriger le code généré.
+            Les développeurs doivent désormais maîtriser le « prompt engineering »
+            et rester critiques face aux suggestions automatiques.
+          </p>
+          <br />
+          <p>
+            Je suis cette évolution de près afin d'anticiper les nouvelles compétences
+            attendues sur le marché du travail et d'adapter ma formation en conséquence.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider container" />
+
+
+  <!-- ============================================================
+       6. GESTION DU PATRIMOINE INFORMATIQUE
+       Décris les concepts et expériences pratiques
+       ============================================================ -->
+  <section id="patrimoine">
+    <div class="container">
+      <span class="section-label">Patrimoine informatique</span>
+      <h2 class="section-title">Gestion du <span>Parc</span></h2>
+
+      <div class="card-grid card-grid-3">
+
+        <!-- == CARTE 1 — Modifie titre et contenu == -->
+        <div class="card">
+          <p class="card-meta">Maintenance</p>
+          <h3 class="card-title">Maintenance préventive &amp; corrective</h3>
+          <p>
+            Installation, mise à jour et dépannage de postes de travail sous Windows et Linux.
+            Gestion des incidents via un outil de ticketing (GLPI).
+          </p>
+        </div>
+
+        <!-- == CARTE 2 == -->
+        <div class="card">
+          <p class="card-meta">Sécurité</p>
+          <h3 class="card-title">Sécurisation du réseau &amp; des données</h3>
+          <p>
+            Mise en place de pare-feux, politiques de mot de passe, sauvegardes automatisées
+            et sensibilisation des utilisateurs aux risques cyber.
+          </p>
+        </div>
+
+        <!-- == CARTE 3 == -->
+        <div class="card">
+          <p class="card-meta">Audit</p>
+          <h3 class="card-title">Inventaire &amp; audit</h3>
+          <p>
+            Réalisation d'audits du parc matériel et logiciel avec OCS Inventory.
+            Mise à jour du registre des équipements et suivi des licences.
+          </p>
+        </div>
+
+        <!-- == CARTE 4 (optionnelle) == -->
+        <div class="card">
+          <p class="card-meta">Virtualisation</p>
+          <h3 class="card-title">Virtualisation &amp; réseaux</h3>
+          <p>
+            Création de machines virtuelles sous VirtualBox / VMware. Configuration de réseaux
+            locaux (VLAN, DHCP, DNS) en environnement de TP.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider container" />
+
+
+  <!-- ============================================================
+       7. TABLEAU DE SYNTHÈSE DES COMPÉTENCES
+       Coche uniquement ce que tu maîtrises vraiment !
+       Modifie les lignes du <tbody> : nom, niveau, maîtrise
+       ============================================================ -->
+  <section id="competences">
+    <div class="container">
+      <span class="section-label">Compétences</span>
+      <h2 class="section-title">Synthèse des <span>Compétences</span></h2>
+
+      <table class="skills-table">
+        <thead>
+          <tr>
+            <th>Compétence</th>
+            <th>Domaine</th>
+            <th>Niveau (sur 5)</th>
+            <th>Maîtrisée ?</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- FORMAT D'UNE LIGNE :
+               - Colonne 1 : nom de la compétence
+               - Colonne 2 : domaine (Dev / Réseau / BDD / Sécurité…)
+               - Colonne 3 : .dot.filled = point plein (maîtrisé), .dot = point vide
+                             Modifie le nombre de .dot.filled pour le niveau
+               - Colonne 4 : ✔ ou ✘ selon ta maîtrise réelle
+          -->
+
+          <tr>
+            <td>HTML / CSS</td>
+            <td>Développement web</td>
+            <td>
+              <div class="skill-level">
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot"></div>
+              </div>
+            </td>
+            <td><span class="check">✔</span></td>
+          </tr>
+
+          <tr>
+            <td>JavaScript</td>
+            <td>Développement web</td>
+            <td>
+              <div class="skill-level">
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </td>
+            <td><span class="check">✔</span></td>
+          </tr>
+
+          <tr>
+            <td>PHP</td>
+            <td>Développement web</td>
+            <td>
+              <div class="skill-level">
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </td>
+            <td><span class="check">✔</span></td>
+          </tr>
+
+          <tr>
+            <td>Python</td>
+            <td>Programmation</td>
+            <td>
+              <div class="skill-level">
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </td>
+            <td><span class="check">✔</span></td>
+          </tr>
+
+          <tr>
+            <td>SQL / MySQL</td>
+            <td>Base de données</td>
+            <td>
+              <div class="skill-level">
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </td>
+            <td><span class="check">✔</span></td>
+          </tr>
+
+          <tr>
+            <td>Git / GitHub</td>
+            <td>Versioning</td>
+            <td>
+              <div class="skill-level">
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </td>
+            <td><span class="check">✔</span></td>
+          </tr>
+
+          <tr>
+            <td>Administration Linux</td>
+            <td>Système</td>
+            <td>
+              <div class="skill-level">
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </td>
+            <td><span class="cross">✘</span></td>
+          </tr>
+
+          <tr>
+            <td>Configuration réseau</td>
+            <td>Réseau</td>
+            <td>
+              <div class="skill-level">
+                <div class="dot filled"></div>
+                <div class="dot filled"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </td>
+            <td><span class="cross">✘</span></td>
+          </tr>
+
+          <!-- == Ajoute d'autres lignes ici en dupliquant un <tr> == -->
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="divider container" />
+
+
+  <!-- ============================================================
+       8. CONTACT
+       Modifie l'email, le téléphone, LinkedIn et GitHub
+       Le formulaire est statique (HTML pur) – pour l'activer,
+       connecte-le à un service comme Formspree (formspree.io)
+       ============================================================ -->
+  <section id="contact">
+    <div class="container">
+      <span class="section-label">Contact</span>
+      <h2 class="section-title">Me <span>Contacter</span></h2>
+
+      <div class="contact-grid">
+
+        <!-- Coordonnées -->
+        <div class="contact-info">
+          <p>
+            Disponible pour une alternance, un stage ou toute opportunité professionnelle.
+            N'hésitez pas à me contacter !
+          </p>
+
+          <!-- ====== MODIFIE TES COORDONNÉES ====== -->
+          <a href="mailto:prenom.nom@email.com" class="contact-link">
+            <span class="contact-icon">✉️</span>
+            prenom.nom@email.com
+          </a>
+          <a href="tel:+33600000000" class="contact-link">
+            <span class="contact-icon">📞</span>
+            06 00 00 00 00
+          </a>
+          <a href="https://linkedin.com/in/ton-profil" target="_blank" class="contact-link">
+            <span class="contact-icon">💼</span>
+            LinkedIn – Prénom NOM
+          </a>
+          <a href="https://github.com/ton-user" target="_blank" class="contact-link">
+            <span class="contact-icon">⬡</span>
+            GitHub – ton-user
+          </a>
+        </div>
+
+        <!-- Formulaire de contact -->
+        <!-- Pour activer l'envoi réel, va sur https://formspree.io et remplace
+             l'action par ton endpoint Formspree, ex : action="https://formspree.io/f/xxxxxabc" -->
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="name">Votre nom</label>
+            <input type="text" id="name" name="name" placeholder="Jean Dupont" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Votre email</label>
+            <input type="email" id="email" name="email" placeholder="jean@exemple.fr" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Votre message…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+            Envoyer ✉️
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       Modifie le nom et l'année si besoin
+       ============================================================ -->
+  <footer>
+    <p>© 2025 Prénom NOM · BTS SIO SLAM · Fait avec ❤️ en HTML/CSS</p>
+  </footer>
+
+</body>
+</html>
